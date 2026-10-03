@@ -1,0 +1,41 @@
+% Headline numbers for paper 003, from the 2026-06-08 stage-4 run
+% (macOS/APFS dev laptop). Source artifacts: results/003-tamper-audit/*/summary.json
+% and docs/superpowers/specs/2026-06-08-003-*-results.md. Every reported number in
+% main.tex resolves to a macro here, so the prose stays traceable to the run.
+%
+% Core macros providecommand'd in main.tex -> override with \renewcommand.
+\renewcommand{\NumPrompts}{200}      % entries in the E1 fixture log
+\renewcommand{\NumAttacks}{26}       % tampered logs in the E1 corpus
+
+% --- E1/E5 detection + localization ---
+\newcommand{\TDR}{100\%}             % tamper detection rate (26/26)
+\newcommand{\TDRcount}{26/26}
+\newcommand{\LOCrate}{100\%}         % localization on point-tamper classes (20/20)
+\newcommand{\LOCcount}{20/20}
+
+% --- E2 write cost (median per entry) ---
+\newcommand{\ComputeUs}{14.0}        % compute-only (blake3+ed25519, no fsync), microseconds
+\newcommand{\ComputeThru}{71{,}400}  % entries/s/core from compute-only
+\newcommand{\PlainUs}{42.6}          % plain v1 baseline, microseconds (no fsync)
+\newcommand{\ChainedMs}{4.95}        % chained, milliseconds (per-entry fsync)
+\newcommand{\ChainedSignedMs}{4.71}  % chained_signed, milliseconds
+\newcommand{\FsyncMs}{4.7}           % per-entry fsync durability tax, milliseconds
+\newcommand{\NvmeLo}{64}             % NVMe-class projection low, microseconds
+\newcommand{\NvmeHi}{214}            % NVMe-class projection high, microseconds
+
+% --- E3 anchor cadence sweep (N=20,000 entries) ---
+\newcommand{\AnchorN}{20{,}000}
+\newcommand{\OverheadKten}{5.84\%}   % storage overhead at k=10
+\newcommand{\OverheadKhund}{0.58\%}  % at k=100
+\newcommand{\OverheadKthou}{0.058\%} % at k=1000
+\newcommand{\OverheadKtenk}{0.006\%} % at k=10000
+\newcommand{\WindowKthou}{13}        % detection window at k=1000
+
+% --- E4 verify scaling ---
+\newcommand{\VerifyThru}{458{,}000}        % unsigned chain, entries/s, roughly flat
+\newcommand{\VerifyThruSigned}{251{,}000}  % per-entry signed via parallel+batch default, entries/s
+\newcommand{\VerifyOneM}{2.18}             % unsigned verify time at 1e6 entries, seconds
+
+% --- system facts ---
+\newcommand{\EntryBytes}{465}        % measured signed entry size, bytes
+\newcommand{\AuditTests}{37}         % audit-module unit tests
